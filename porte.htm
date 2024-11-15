@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Abd el-Sadiq - Data Analyst Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+#showcase {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), url('https://source.unsplash.com/random/1600x900?data') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8));
+            z-index: 1;
+        }
+
+        #showcase .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #showcase h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #showcase p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .btn {
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .skills-container, .experience-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category, .experience-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before, .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover::before, .experience-item:hover::before {
+            transform: scaleY(1);
+        }
+.skill-category:hover, .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .skill-category h3, .experience-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill {
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .language-selector select {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector select:hover {
+            background: var(--accent-color);
+        }
+
+        [lang="ar"] {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+
+        [lang="ar"] .language-selector {
+            left: 20px;
+            right: auto;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--primary-color);
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        [lang="ar"] .theme-switcher {
+            left: 20px;
+            right: auto;
+        }
+
+        .theme-switcher i {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #f5f5f5;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+        }
+
+        [data-theme="dark"] .skill-category,
+        [data-theme="dark"] .experience-item {
+            background: #2d2d2d;
+            color: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            #showcase h1 {
+                font-size: 3rem;
+            }
+
+            #showcase p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skill-category, .experience-item {
+                padding: 1.5rem;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                padding: 0.5rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body>
+    <div class="language-selector">
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <div class="theme-switcher" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <header>
+        <nav class="container">
+            <h1>Ahmed Abd el-Sadiq</h1>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul>
+                <li><a href="#showcase" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                <li><a href="#skills" data-en="Skills" data-ar="المهارات">Skills</a></li>
+                <li><a href="#experience" data-en="Experience" data-ar="الخبرات">Experience</a></li>
+                <li><a href="#contact" data-en="Contact" data-ar="اتصل بي">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Ahmed Abd el-Sadiq</h1>
+            <p data-en="Aspiring Data Analyst | Technology Enthusiast" data-ar="محلل بيانات طموح | شغوف بالتكنولوجيا">
+                Aspiring Data Analyst | Technology Enthusiast
+            </p>
+            <p class="intro" data-en="I'm Ahmed Abd el-Sadiq, a high school student passionate about learning programming and developing my skills in technology. I continuously strive to grow my expertise and apply what I learn in practical projects aimed at solving problems and achieving innovation."
+               data-ar="أنا أحمد عبد الصادق، طالب في المرحلة الثانوية مهتم بتعلم البرمجة وتطوير مهاراتي في مجال التكنولوجيا. أسعى باستمرار لتنمية خبراتي وتطبيق ما أتعلمه في مشاريع عملية تهدف إلى حل المشكلات وتحقيق الابتكار.">
+                I'm Ahmed Abd el-Sadiq, a high school student passionate about learning programming and developing my skills in technology. I continuously strive to grow my expertise and apply what I learn in practical projects aimed at solving problems and achieving innovation.
+            </p>
+            <a href="#contact" class="btn" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</a>
+        </div>
+    </section>
+<section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="My Skills" data-ar="مهاراتي">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 data-en="Programming Languages" data-ar="لغات البرمجة">Programming Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill">Python</div>
+                        <div class="skill">SQL</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-en="Analytical Skills" data-ar="المهارات التحليلية">Analytical Skills</h3>
+                    <div class="skill-list">
+<div class="skill" data-en="Data Cleaning" data-ar="تنظيف البيانات">Data Cleaning</div>
+                        <div class="skill" data-en="Data entry" data-ar="ادخال البيانات">Data entry</div>
+                        <div class="skill" data-en="Data Analysis" data-ar="تحليل البيانات">Data Analysis</div>
+                        <div class="skill" data-en="Data Mining" data-ar="استخراج البيانات">Data Mining</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-en="Tools and Applications" data-ar="الأدوات والتطبيقات">Tools and Applications</h3>
+                    <div class="skill-list">
+                        <div class="skill" data-en="Excel" data-ar="إكسل">Excel</div>
+                        <div class="skill" data-en="Power BI" data-ar="باور بي آي">Power BI</div>
+                        <div class="skill" data-en="Jupyter Notebook" data-ar="جوبيتر نوتبوك">Jupyter Notebook</div>
+                        <div class="skill" data-en="Git" data-ar="جيت">Git</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-en="Languages" data-ar="اللغات">Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill language-skill" data-en="Arabic" data-ar="العربية" data-level="Native">Arabic</div>
+                        <div class="skill language-skill" data-en="English" data-ar="الإنجليزية" data-level="B1">English</div>
+                        <div class="skill language-skill" data-en="French" data-ar="الفرنسية" data-level="A2">French</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Work Experience" data-ar="الخبرة العملية">Work Experience</h2>
+            <div class="experience-container">
+                <div class="experience-item">
+                    <h3 data-en="HR Assistant" data-ar="مساعد الموارد البشرية">HR Assistant</h3>
+                    <p class="experience-duration" data-en="Duration: June 2024 - August 2024" data-ar="المدة: يونيو 2024 - أغسطس 2024">Duration: June 2024 - August 2024</p>
+                    <p data-en="Responsibilities: Collecting data from websites, preparing weekly reports using Excel, data entry and management" data-ar="المسؤوليات: جمع البيانات من المواقع، إعداد تقارير أسبوعية باستخدام Excel، إدخال وإدارة البيانات">Responsibilities: Collecting data from websites, preparing weekly reports using Excel, data entry and management</p>
+                </div>
+                <div class="experience-item">
+                    <h3 data-en="Web Scraping Intern" data-ar="متدرب في استخراج البيانات">Web Scraping Intern</h3>
+                    <p class="experience-duration" data-en="Duration: August 2024 - September 2024" data-ar="المدة: أغسطس 2024 - سبتمبر 2024">Duration: August 2024 - September 2024</p>
+                    <p data-en="Responsibilities: Extracting data from platforms like Reddit, preparing reports on extracted data, training on web scraping tools and techniques" data-ar="المسؤوليات: استخراج البيانات من منصات مثل Reddit، إعداد تقارير عن البيانات المستخرجة، التدريب على أدوات وتقنيات استخراج البيانات">Responsibilities: Extracting data from platforms like Reddit, preparing reports on extracted data, training on web scraping tools and techniques</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Contact Me" data-ar="تواصل معي">Contact Me</h2>
+            <div class="social-links">
+                <a href="https://github.com/ahmedegio" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:ahmed.abdel.sadiq.eid@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+<script>
+        // Theme switcher functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-switcher i');
+
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('.theme-switcher i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Language switcher
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[data-' + lang + ']');
+            elements.forEach(element => {
+                element.textContent = element.getAttribute('data-' + lang);
+            });
+        }
+    </script>
+</body>
+</html>
